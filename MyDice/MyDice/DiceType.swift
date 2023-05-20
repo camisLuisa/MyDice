@@ -9,6 +9,7 @@ import Foundation
 
 enum DiceType: CaseIterable, Identifiable {
 
+	case D4
 	case D6
 	case D20
 
@@ -17,6 +18,8 @@ enum DiceType: CaseIterable, Identifiable {
 	var numberOfFaces: Int {
 
 		switch self {
+		case .D4:
+			return 4
 		case .D6:
 			return 6
 		case .D20:
@@ -27,11 +30,12 @@ enum DiceType: CaseIterable, Identifiable {
 	var name: String {
 
 		switch self {
+		case .D4:
+			return "Tetrahedron"
 		case .D6:
 			return "Cube"
 		case .D20:
 			return "Icosahedron"
-
 		}
 	}
 }
