@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
 
-	@State private var highestDiceValue = 7
 	@State private var diceFace = 0
 	@State private var historicalDiceFaces: [Int] = []
 	@State private var diceType: DiceType = .D6
@@ -25,7 +24,9 @@ struct ContentView: View {
 
 					Button {
 
-						diceFace = Int.random(in: Range(uncheckedBounds: (1, highestDiceValue)))
+						let upperBound = diceType.numberOfFaces + 1
+
+						diceFace = Int.random(in: Range(uncheckedBounds: (1, upperBound)))
 						historicalDiceFaces.append(diceFace)
 					} label: {
 
@@ -33,7 +34,7 @@ struct ContentView: View {
 					}
 					.buttonStyle(.borderedProminent)
 
-					Picker("Dice type", selection: $diceFace) {
+					Picker("Dice type", selection: $diceType) {
 
 						ForEach(DiceType.allCases) { dice in
 							Text(dice.name)

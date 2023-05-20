@@ -10,6 +10,7 @@ import Foundation
 enum DiceType: CaseIterable, Identifiable {
 
 	case D6
+	case D20
 
 	var id: Self { self }
 
@@ -18,6 +19,8 @@ enum DiceType: CaseIterable, Identifiable {
 		switch self {
 		case .D6:
 			return 6
+		case .D20:
+			return 20
 		}
 	}
 
@@ -26,6 +29,8 @@ enum DiceType: CaseIterable, Identifiable {
 		switch self {
 		case .D6:
 			return "Cube"
+		case .D20:
+			return "Icosahedron"
 
 		}
 	}
