@@ -9,9 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
 
-	@State var highestDiceValue = 7
-	@State var diceFace = 0
-	@State var historicalDiceFaces: [Int] = []
+	@State private var highestDiceValue = 7
+	@State private var diceFace = 0
+	@State private var historicalDiceFaces: [Int] = []
+	@State private var diceType: DiceType = .D6
 
     var body: some View {
 
@@ -31,6 +32,13 @@ struct ContentView: View {
 						Text("Roll")
 					}
 					.buttonStyle(.borderedProminent)
+
+					Picker("Dice type", selection: $diceFace) {
+
+						ForEach(DiceType.allCases) { dice in
+							Text(dice.name)
+						}
+					}
 
 					Rectangle()
 						.foregroundColor(.white)
