@@ -9,21 +9,49 @@ import SwiftUI
 
 struct ContentView: View {
 
-	@State var highestDiceValue = 6
+	@State var highestDiceValue = 7
 	@State var diceFace = 0
+	@State var historicalDiceFaces: [Int] = []
 
     var body: some View {
-        VStack {
-            Text("Face: \(diceFace)")
 
-			Button {
+		NavigationView {
+			
+			HStack {
+				VStack {
+					Text("Face: \(diceFace)")
+					.font(.custom("AmericanTypewriter", fixedSize: 24))
 
-				diceFace = Int.random(in: Range(uncheckedBounds: (1, highestDiceValue)))
-			} label: {
-				Text("Roll")
+					Button {
+
+						diceFace = Int.random(in: Range(uncheckedBounds: (1, highestDiceValue)))
+						historicalDiceFaces.append(diceFace)
+					} label: {
+
+						Text("Roll")
+					}
+					.buttonStyle(.borderedProminent)
+
+					Rectangle()
+						.foregroundColor(.white)
+				}
+				.navigationTitle("My Dice")
+				.padding()
+
+				List {
+
+					Section(header: Text("Historical")) {
+
+						ForEach($historicalDiceFaces, id: \.self) {
+							historicalDiceFace in
+							Text("Face: \(historicalDiceFace.wrappedValue)")
+						}
+					}
+				}
+				.listStyle(.insetGrouped)
+				.frame(width: 180)
 			}
-        }
-        .padding()
+		}
     }
 }
 
